@@ -13,70 +13,38 @@
 #include "libft.h"
 #include "fillit.h"
 
-static int	ft_l_bverif_bis(char *l)
-{
-	int		i;
-	t_point	tab[4];
-	int		j;
-	int		tot;
-	t_point	value;
-
-	j = 0;
-	tot = 0;
-	i = 1;
-	while (l[i - 1] != '\0')
-	{
-		if (l[i - 1] == '#')
-		{
-			(tab[j])->x = i % 5;
-			(tab[j])->y = i / 5 + 1;
-			j++;
-		}
-		i++;
-	}
-	while (j != 4)
-	{
-	if (((value->x = ABS((tab[(j + 1) % 4])->x - (tab[j])->x)) > 1) || ((value->y = ABS((tab[(j + 1) % 4])->y - (tab[j])->y)) > 1) && ((tot = value->x + value->y) > 1))
-		if (((value->x = ABS((tab[(j + 2) % 4])->x - (tab[j])->x)) > 1) || ((value->y = ABS((tab[(j + 2) % 4])->y - (tab[j])->y)) > 1) && ((tot = value->x + value->y) > 1))
-			if (((value->x = ABS((tab[(j + 3) % 4])->x - (tab[j])->x)) > 1) || ((value->y = ABS((tab[(j + 3) % 4])->y - (tab[j])->y)) > 1) && ((tot = value->x + value->y) > 1))
-
-
-
-
-
-
 static int	ft_l_verif(char *l)
 {
 	int		i;
 	int		j;
+	int		connect;
 
 	j = 0;
 	i = 0;
+	connect = 0;
+	if (l[20] != '\0')
+		return (0);
 	while (l[i] != '\0')
 	{
+		if ((i % 5 != 0) && l[i] == '\n')
+			return (0);	
 		if (l[i] != '#' && l[i] != '\n' && l[i] != '.')
 			return (0);
-		i++;
-	}
-	i = 1;
-	while (i < 21 != '\0')
-	{
-		if ((i % 5 != 0) && l[i - 1] == '\n')
-			return (0);
-		i++;
-	}
-	if (l[20] != '\n')
-		return (0);
-	i = 0;
-	while (l[i] != '\0')
-	{
 		if (l[i] == '#')
+		{
+			if (l[i + 1] == '#' && (i + 1) < 20)
+				connect++;
+			if (l[i - 1] == '#' && (i - 1) >= 0)
+				connect++;
+			if (l[i + 5] == '#' && (i + 5) < 20)
+				connect++;
+			if (l[i - 5] == '#' && (i - 5) >= 0)
+				connect++;
 			j++;
+		}
 		i++;
 	}
-	if (j != 4)
-		return (0);
-	if (!(ft_l_verif_bis(l)))
+	if (connect != 6 || connect != 8 || j != 4)
 		return (0);
 	return (1);
 }
@@ -113,7 +81,7 @@ t_tetri		*ft_create_tetri(char *l, int value)
 	}
 	return (list);
 }
-	
+
 static int	ft_copy(int fd, char **save, char *tmp)
 {
 	char	*l;
@@ -165,4 +133,3 @@ int		main(int argc, char **argv)
 	ft_putchar(line);
 	return (0);
 }
-
