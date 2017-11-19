@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 09:45:29 by arobion           #+#    #+#             */
-/*   Updated: 2017/11/19 12:00:01 by arobion          ###   ########.fr       */
+/*   Updated: 2017/11/19 13:31:09 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include "libft.h"
 # define BUFF_SIZE 21
-
+# define ABS(v) ((v) < 0 ? -(v) : (v))
 typedef struct		s_point
 {
 	int		x;
