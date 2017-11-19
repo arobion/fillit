@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 17:27:29 by arobion           #+#    #+#             */
-/*   Updated: 2017/11/19 19:27:35 by arobion          ###   ########.fr       */
+/*   Updated: 2017/11/19 19:48:58 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	ft_l_verif(char *l)
 	j = 0;
 	i = 0;
 	connect = 0;
-	if (l[20] != '\n')
+	if (l[20] != '\n' && l[20] != '\0')
 		return (0);
-	while (l[i] != '\0')
+	while (l[i] != '\0' && i <= 20)
 	{
 		if (((i + 1) % 5 != 0) && l[i] == '\n')
 			return (0);	
@@ -43,7 +43,7 @@ static int	ft_l_verif(char *l)
 		}
 		i++;
 	}
-	if (connect != 6 || connect != 8 || j != 4)
+	if (connect != 6 && connect != 8 && j != 4)
 		return (0);
 	return (1);
 }
@@ -113,6 +113,7 @@ static int	ft_copy(int fd, t_tetri **begin_list)
 			return (0);
 		if (!(list = ft_tetri_list_pushback(begin_list)))
 			return (0);
+		dprintf(1, "ici\n");
 		if (!(list = ft_tetri_value(l, value, list)))
 			return (0);
 		value++;
