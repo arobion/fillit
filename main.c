@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 17:27:29 by arobion           #+#    #+#             */
-/*   Updated: 2017/11/20 13:09:49 by arobion          ###   ########.fr       */
+/*   Updated: 2017/11/20 19:39:37 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 int		main(int argc, char **argv)
 {
-	char	*line;
-
 	if (argc != 2)
 		return (write(1, "usage: fillit target\n", 21));
 	if (!(ft_read_file(argv[1])))

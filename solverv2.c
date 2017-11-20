@@ -6,13 +6,13 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 15:07:00 by arobion           #+#    #+#             */
-/*   Updated: 2017/11/20 19:00:23 by arobion          ###   ########.fr       */
+/*   Updated: 2017/11/20 19:40:09 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int	ft_clear_tetri(t_point pos, int c, char **map, t_tetri *list)
+static int	ft_clear_tetri(t_point pos, char **map, t_tetri *list)
 {
 	int		i;
 
@@ -80,7 +80,7 @@ static int	ft_backtrack(t_point pos, int c, char **map, t_tetri *begin_list)
 		}
 		if (i == 1)
 		{
-			ft_clear_tetri(pos, c, map, begin_list);
+			ft_clear_tetri(pos, map, begin_list);
 			i = 0;
 		}
 		pos.x += 1;
