@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 11:59:32 by arobion           #+#    #+#             */
-/*   Updated: 2017/11/20 12:54:59 by arobion          ###   ########.fr       */
+/*   Updated: 2017/11/20 16:08:03 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,19 @@ int			ft_read_file(char *str)
 {
 	int		fd;
 	t_tetri	*begin_list;
+	int		i;
+	char	**map;
 
 	begin_list = NULL;
 	if ((fd = open(str, O_RDONLY)) == -1)
 		return (0);
 	if (!(ft_copy(fd, &begin_list)))
 		return (0);
-		while (begin_list)
+	i = ft_count_size_list(begin_list);
+	if (!(map =ft_create_map(i)))
+		return (0);
+	ft_solver(map, begin_list);
+/*		while (begin_list)
 		{
 		dprintf(1, "point1x = %d\npoint1y = %d\n", begin_list->tab[0].x, begin_list->tab[0].y);
 		dprintf(1, "point2x = %d\npoint2y = %d\n", begin_list->tab[1].x, begin_list->tab[1].y);
@@ -100,5 +106,5 @@ int			ft_read_file(char *str)
 		dprintf(1, "\n\n");
 		begin_list = begin_list->next;
 		}
-		return (1);
+*/		return (1);
 }
