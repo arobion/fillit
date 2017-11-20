@@ -6,11 +6,28 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 12:01:04 by arobion           #+#    #+#             */
-/*   Updated: 2017/11/20 12:18:00 by arobion          ###   ########.fr       */
+/*   Updated: 2017/11/20 13:03:52 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+static void		ft_change_reper(t_tetri **list)
+{
+	int		i;
+	t_point	save;
+
+	save.x = (*list)->tab[0].x;
+	save.y = (*list)->tab[0].y;
+	(*list)->tab[0].x = 0;
+	(*list)->tab[0].y = 0;
+	i = 1;
+	while (i < 4)
+	{
+		(*list)->tab[i].x -= save.x;
+		(*list)->tab[i].y -= save.y;
+		i++;
+	}
+}
 
 t_tetri			*ft_tetri_value(char *l, int value, t_tetri *list)
 {
@@ -30,6 +47,7 @@ t_tetri			*ft_tetri_value(char *l, int value, t_tetri *list)
 		}
 		i++;
 	}
+	ft_change_reper(&list);
 	return (list);
 }
 
