@@ -6,7 +6,7 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 11:59:32 by arobion           #+#    #+#             */
-/*   Updated: 2017/11/20 16:08:03 by arobion          ###   ########.fr       */
+/*   Updated: 2017/11/22 12:27:52 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,18 @@ static int	ft_l_verif(char *l)
 	return (1);
 }
 
-static int	ft_copy(int fd, t_tetri **begin_list)
+static int	ft_boucle(char *l, t_tetri **begin_list, t_tetri *list, int value)
+{
+	if (!(ft_l_verif(l)))
+		return (0);
+	if (!(list = ft_tetri_list_pushback(begin_list)))
+		return (0);
+	if (!(list = ft_tetri_value(l, value, list)))
+		return (0);
+	return (1);
+}
+
+static int	ft_copy(int fd, t_tetri **begin_list, int *fin)
 {
 	char	*l;
 	size_t	end;
@@ -64,13 +75,13 @@ static int	ft_copy(int fd, t_tetri **begin_list)
 		return (0);
 	while ((end = read(fd, l, BUFF_SIZE)))
 	{
-		if (!(ft_l_verif(l)))
-			return (0);
-		if (!(list = ft_tetri_list_pushback(begin_list)))
-			return (0);
-		if (!(list = ft_tetri_value(l, value, list)))
+		if (!(ft_boucle(l, begin_list, list, value)))
 			return (0);
 		value++;
+		if (value > 26)
+			return (0);
+		if (end == 20)
+			(*fin)++;
 		if (end < 20)
 			return (0);
 	}
@@ -80,13 +91,17 @@ static int	ft_copy(int fd, t_tetri **begin_list)
 	return (1);
 }
 
-int		ft_read_file(char *str, t_tetri **begin_list)
+int			ft_read_file(char *str, t_tetri **begin_list)
 {
 	int		fd;
+	int		fin;
 
+	fin = 0;
 	if ((fd = open(str, O_RDONLY)) == -1)
 		return (0);
-	if (!(ft_copy(fd, begin_list)))
+	if (!(ft_copy(fd, begin_list, &fin)))
+		return (0);
+	if (fin != 1)
 		return (0);
 	return (1);
 }

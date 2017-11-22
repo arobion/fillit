@@ -6,32 +6,11 @@
 /*   By: arobion <arobion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 12:01:04 by arobion           #+#    #+#             */
-/*   Updated: 2017/11/20 16:10:54 by arobion          ###   ########.fr       */
+/*   Updated: 2017/11/22 11:39:16 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-int				ft_count_size_list(t_tetri *begin_list)
-{
-	int		i;
-	int		j;
-
-	j = 0;
-	i = 0;
-	while (begin_list)
-	{
-		i++;
-		begin_list = begin_list->next;
-	}
-	i *= 4;
-	while ((j * j) < i)
-		j++;
-	j++;
-	if (j < 4)
-		j = 4;
-	return (j);
-}
 
 static void		ft_change_reper(t_tetri **list)
 {
@@ -73,7 +52,7 @@ t_tetri			*ft_tetri_value(char *l, int value, t_tetri *list)
 	return (list);
 }
 
-void	ft_clear_list(t_tetri **begin_list)
+void			ft_clear_list(t_tetri **begin_list)
 {
 	t_tetri *del;
 	t_tetri *tmp;
