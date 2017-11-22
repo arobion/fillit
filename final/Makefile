@@ -3,30 +3,48 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arobion <arobion@student.42.fr>            +#+  +:+       +#+         #
+#    By: pnardozi <pnardozi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/11/18 17:04:16 by arobion           #+#    #+#              #
-#    Updated: 2017/11/18 17:25:29 by arobion          ###   ########.fr        #
+#    Created: 2017/11/22 11:51:45 by pnardozi          #+#    #+#              #
+#    Updated: 2017/11/22 14:45:56 by pnardozi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-C = cc
+CC = gcc
 
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 NAME = fillit
 
-SRCS = *.c
+SRC = main.c \
+	  solver.c \
+	  map.c \
+	  list.c \
+	  read.c
 
 OBJ = $(SRC:.c=.o)
 
-INCLUDES = libft.h
+LIB = libft/libft.a
 
-all: $(NAME)
+INCLUDES = includes/
+
+RED = \033[31m
+GREEN = \033[32m
+END = \033[0m
+
+all : $(NAME)
 
 $(NAME):
-	$(CC) -o $(NAME) $(SRCS) $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(SRC) -I $(INCLUDES)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
+	@echo "$(GREEN)FILLIT READY$(END)"
 
 clean:
-	/bin/rm -rf 
+	/bin/rm -f $(OBJ)
+	@echo "$(RED)FILLIT OBJECTS REMOVE$(END)"
 
+fclean: clean
+	/bin/rm -f $(NAME)
+	@echo "$(RED)FILLIT REMOVE$(END)"
+
+re: fclean all
